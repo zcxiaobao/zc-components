@@ -1,12 +1,5 @@
 <template>
-    <el-menu default-active="/" class="el-menu-vertical-demo" :collapse="collapse" router>
-        <el-menu-item index="/">
-            <template #title>首页</template>
-        </el-menu-item>
-        <el-menu-item index="/menu">
-            <template #title>导航菜单</template>
-        </el-menu-item>
-    </el-menu>
+    <zc-menu :collapse="collapse" :data="data" :router="router" :defaultActive="$route.path"></zc-menu>
 </template>
 
 <script setup lang="ts">
@@ -14,6 +7,21 @@
 defineProps<{
     collapse: boolean
 }>()
+
+const data = [
+    {
+        name: '首页',
+        index: '/',
+        icon: 'HomeFilled'
+    },
+    {
+        name: '导航菜单',
+        index: '/menu',
+        icon: 'Menu'
+    },
+]
+
+const router = true
 </script>
 
 <style scoped lang="scss">
