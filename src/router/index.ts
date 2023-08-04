@@ -6,6 +6,10 @@ const routes: RouteRecordRaw[] = [
     component: Container,
     children: [
       { path: "menu", component: () => import("../views/menu/index.vue") },
+      {
+        path: "icon-select",
+        component: () => import("../views/icon-select/index.vue"),
+      },
     ],
   },
 ];

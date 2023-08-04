@@ -19,6 +19,11 @@ const data = [
         index: '/menu',
         icon: 'Menu'
     },
+    {
+        name: '图标选择器',
+        index: '/icon-select',
+        icon: 'Document'
+    },
 ]
 
 const router = true
