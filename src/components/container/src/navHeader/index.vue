@@ -1,7 +1,7 @@
 <template>
     <div class="header" @click="toggle">
-        <el-button type="primary" v-if="props.collapse">展开</el-button>
-        <el-button type="primary" v-else>折叠</el-button>
+        <el-icon-expand v-if="props.collapse"></el-icon-expand>
+        <el-icon-fold v-else></el-icon-fold>
     </div>
 </template>
 
@@ -18,9 +18,14 @@ const toggle = function () {
 
 <style scoped lang="scss">
 .header {
-    height: 70px;
+    height: 60px;
     padding: 0 20px;
     display: flex;
     align-items: center;
+}
+
+svg {
+    width: 1em;
+    height: 1em;
 }
 </style>
