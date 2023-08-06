@@ -1,6 +1,6 @@
 <template>
     <el-button @click="dialogVisible = true">打开对话框</el-button>
-    <zc-dialog v-model="dialogVisible">
+    <zc-dialog v-model="dialogVisible" v-draggable>
         dialog
     </zc-dialog>
 </template>

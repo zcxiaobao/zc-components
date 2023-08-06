@@ -1,21 +1,23 @@
 <template>
-    <el-dialog v-bind='$attrs'>
-        <el-scrollbar :max-height="props.isScroll ? props.scrollHeight : 100000">
-            <template #default>
-                <slot name="default" />
-            </template>
-        </el-scrollbar>
+    <div>
+        <el-dialog v-bind='$attrs'>
+            <el-scrollbar :max-height="props.isScroll ? props.scrollHeight : 100000">
+                <template #default>
+                    <slot name="default" />
+                </template>
+            </el-scrollbar>
 
-        <template #header>
-            <slot name="header" />
-        </template>
-        <template #footer>
-            <slot name="footer" />
-        </template>
-        <!-- <template #[slotName] v-for="(_, slotName) in $slots">
+            <template #header>
+                <slot name="header" />
+            </template>
+            <template #footer>
+                <slot name="footer" />
+            </template>
+            <!-- <template #[slotName] v-for="(_, slotName) in $slots">
             <slot :name="slotName" />
         </template> -->
-    </el-dialog>
+        </el-dialog>
+    </div>
 </template>
 
 <script setup lang="ts">
