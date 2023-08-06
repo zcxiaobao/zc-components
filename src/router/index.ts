@@ -10,6 +10,21 @@ const routes: RouteRecordRaw[] = [
         path: "icon-select",
         component: () => import("../views/icon-select/index.vue"),
       },
+      {
+        path: "/dialog",
+        component: () => import("../views/dialog/index.vue"),
+        redirect: "/dialog/drag",
+        children: [
+          {
+            path: "drag",
+            component: () => import("../views/dialog/dragDialog/index.vue"),
+          },
+          {
+            path: "scroll",
+            component: () => import("../views/dialog/scrollDialog/index.vue"),
+          },
+        ],
+      },
     ],
   },
 ];
