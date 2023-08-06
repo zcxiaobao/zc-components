@@ -29,8 +29,8 @@ const Draggable: Directive = {
         } else if (elTop > maxY) {
           elTop = maxY;
         }
-        el.style.left = maxX + "px";
-        el.style.top = maxY + "px";
+        el.style.left = elLeft + "px";
+        el.style.top = elTop + "px";
       };
 
       document.onmouseup = function () {
