@@ -1,16 +1,14 @@
 <template>
-    <zc-dialog>
-        <template #header>
-            <div>123</div>
-        </template>
-        <template #footer>
-            <el-button>11</el-button>
-        </template>
+    <el-button @click="dialogVisible = true">打开对话框</el-button>
+    <zc-dialog v-model="dialogVisible">
+        dialog
     </zc-dialog>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 
+let dialogVisible = ref<boolean>(true)
 </script>
 
 <style scoped></style>

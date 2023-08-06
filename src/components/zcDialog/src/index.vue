@@ -1,29 +1,35 @@
 <template>
-    <el-dialog v-bind='$attrs' v-model="visible">
-        <template #[slotName] v-for="(_, slotName) in $slots">
-            <slot :name="slotName" />
+    <el-dialog v-bind='$attrs'>
+        <el-scrollbar :max-height="props.isScroll ? props.scrollHeight : 100000">
+            <template #default>
+                <slot name="default" />
+            </template>
+        </el-scrollbar>
+
+        <template #header>
+            <slot name="header" />
         </template>
+        <template #footer>
+            <slot name="footer" />
+        </template>
+        <!-- <template #[slotName] v-for="(_, slotName) in $slots">
+            <slot :name="slotName" />
+        </template> -->
     </el-dialog>
 </template>
 
 <script setup lang="ts">
-import { useSlots, ref } from 'vue';
+import { useAttrs } from 'vue';
+import { ZcDialogProps } from './types';
 
-const $slots = useSlots()
-for (let k in $slots) {
-    console.log(k)
-}
-defineProps<{
-    isScroll: {
-        type: Boolean,
-        default: false
-    },
-    isDrag: {
-        type: Boolean,
-        default: false
-    }
-}>()
-let visible = ref(true)
+const $attrs = useAttrs()
+
+
+const props = withDefaults(defineProps<ZcDialogProps>(), {
+    isScroll: false,
+    isDrag: false,
+    scrollHeight: 400
+})
 </script>
 
 <style scoped></style>
