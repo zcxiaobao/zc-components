@@ -24,6 +24,23 @@ const data = [
         index: '/icon-select',
         icon: 'Document'
     },
+    {
+        name: '对话框',
+        index: '/dialog',
+        icon: 'ChatLineRound',
+        children: [
+            {
+                name: '可拖拽式对话框',
+                index: '/dialog/drag',
+                icon: 'ChatRound',
+            },
+            {
+                name: '带滚动条的对话框',
+                index: '/dialog/scroll',
+                icon: 'ChatDotRound',
+            }
+        ]
+    }
 ]
 
 const router = true
