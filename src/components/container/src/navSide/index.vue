@@ -40,6 +40,18 @@ const data = [
                 icon: 'ChatDotRound',
             }
         ]
+    },
+    {
+        name: '自定义指令',
+        index: '/directive',
+        icon: 'Tools',
+        children: [
+            {
+                name: '拖拽指令',
+                index: '/directive/drag',
+                icon: 'Mouse',
+            }
+        ]
     }
 ]
 
