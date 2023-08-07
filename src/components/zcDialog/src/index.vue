@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-dialog-drag="props.isDrag">
         <el-dialog v-bind='$attrs'>
             <el-scrollbar :max-height="props.isScroll ? props.scrollHeight : 100000">
                 <template #default>
@@ -13,9 +13,6 @@
             <template #footer>
                 <slot name="footer" />
             </template>
-            <!-- <template #[slotName] v-for="(_, slotName) in $slots">
-            <slot :name="slotName" />
-        </template> -->
         </el-dialog>
     </div>
 </template>
@@ -23,7 +20,7 @@
 <script setup lang="ts">
 import { useAttrs } from 'vue';
 import { ZcDialogProps } from './types';
-
+import vDialogDrag from './dialogdrag.ts'
 const $attrs = useAttrs()
 
 
