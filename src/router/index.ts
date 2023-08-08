@@ -34,6 +34,10 @@ const routes: RouteRecordRaw[] = [
             path: "drag",
             component: () => import("../views/directive/vDrag/index.vue"),
           },
+          {
+            path: "debounce",
+            component: () => import("../views/directive/vDebounce/index.vue"),
+          },
         ],
       },
     ],

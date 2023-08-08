@@ -50,6 +50,11 @@ const data = [
                 name: '拖拽指令',
                 index: '/directive/drag',
                 icon: 'Mouse',
+            },
+            {
+                name: '防抖指令',
+                index: '/directive/debounce',
+                icon: 'Mouse',
             }
         ]
     }

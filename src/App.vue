@@ -4,6 +4,4 @@
 <script setup lang="ts">
 </script>
 
-<style  lang="scss">
-@import "./styles/base";
-</style>
+<style  lang="scss"></style>
