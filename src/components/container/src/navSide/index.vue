@@ -55,6 +55,11 @@ const data = [
                 name: '防抖指令',
                 index: '/directive/debounce',
                 icon: 'Mouse',
+            },
+            {
+                name: '节流指令',
+                index: '/directive/throttle',
+                icon: 'Mouse',
             }
         ]
     }

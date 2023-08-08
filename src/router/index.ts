@@ -38,6 +38,10 @@ const routes: RouteRecordRaw[] = [
             path: "debounce",
             component: () => import("../views/directive/vDebounce/index.vue"),
           },
+          {
+            path: "throttle",
+            component: () => import("../views/directive/vThrottle/index.vue"),
+          },
         ],
       },
     ],
