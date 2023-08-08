@@ -65,6 +65,11 @@ const data = [
                 name: '复制指令',
                 index: '/directive/copy',
                 icon: 'Mouse',
+            },
+            {
+                name: '长按指令',
+                index: '/directive/longpress',
+                icon: 'Mouse',
             }
         ]
     }

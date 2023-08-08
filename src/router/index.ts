@@ -46,6 +46,10 @@ const routes: RouteRecordRaw[] = [
             path: "copy",
             component: () => import("../views/directive/vCopy/index.vue"),
           },
+          {
+            path: "longpress",
+            component: () => import("../views/directive/vLongPress/index.vue"),
+          },
         ],
       },
     ],
