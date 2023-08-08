@@ -60,6 +60,11 @@ const data = [
                 name: '节流指令',
                 index: '/directive/throttle',
                 icon: 'Mouse',
+            },
+            {
+                name: '复制指令',
+                index: '/directive/copy',
+                icon: 'Mouse',
             }
         ]
     }

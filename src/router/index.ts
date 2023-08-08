@@ -42,6 +42,10 @@ const routes: RouteRecordRaw[] = [
             path: "throttle",
             component: () => import("../views/directive/vThrottle/index.vue"),
           },
+          {
+            path: "copy",
+            component: () => import("../views/directive/vCopy/index.vue"),
+          },
         ],
       },
     ],
