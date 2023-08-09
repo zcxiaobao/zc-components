@@ -50,6 +50,11 @@ const data = [
                 index: "/select/multiple",
                 icon: "Mouse",
             },
+            {
+                name: "下拉加载下拉框",
+                index: "/select/loadmore",
+                icon: "Mouse",
+            },
         ],
     },
     {

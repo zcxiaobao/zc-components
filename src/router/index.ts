@@ -33,6 +33,10 @@ const routes: RouteRecordRaw[] = [
             path: "multiple",
             component: import("../views/select/multipleSelect/index.vue"),
           },
+          {
+            path: "loadmore",
+            component: import("../views/select/loadmoreSelect/index.vue"),
+          },
         ],
       },
       {
