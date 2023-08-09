@@ -26,6 +26,16 @@ const routes: RouteRecordRaw[] = [
         ],
       },
       {
+        path: "select",
+        component: () => import("../views/select/index.vue"),
+        children: [
+          {
+            path: "multiple",
+            component: import("../views/select/multipleSelect/index.vue"),
+          },
+        ],
+      },
+      {
         path: "/directive",
         component: () => import("../views/directive/index.vue"),
         redirect: "/directive/drag",
