@@ -1,5 +1,5 @@
 <template>
-    <zc-select :data="data" v-model="selectVal" :isMuliple="true" collapse-tags></zc-select>
+    <zc-select :data="data" v-model="selectVal" :isCheck="true" @change="change" collapse-tags></zc-select>
 </template>
 
 <script setup lang="ts">
@@ -27,6 +27,9 @@ const data = [
     },
 ]
 const selectVal = ref([])
+const change = (val: any) => {
+    console.log(val)
+}
 </script>
 
 <style scoped></style>

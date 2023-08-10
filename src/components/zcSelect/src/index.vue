@@ -1,21 +1,21 @@
 
 <template>
-    <el-select v-model="selectVal" v-bind="$attrs" :multiple="isMuliple" :teleported="false" v-loadmore="{
+    <el-select v-model="selectVal" v-bind="$attrs" :multiple="isCheck" :teleported="false" v-loadmore="{
         'isLoadmore': isLoadmore,
         'callback': loadmoreFn
     }">
-        <div class="check-all" v-if="isMuliple">
+        <div class="check-all" v-if="isCheck">
             <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange">全选</el-checkbox>
         </div>
 
         <el-option v-for=" item in selectData" :key="item[props.valueKey]" :label="item[props.labelKey]"
             :value="item[props.valueKey]">
             <el-checkbox v-model="item.checked" :label="item[props.labelKey]" size="large" @click.stop.native
-                @change="handleItemChange(item)" v-if="isMuliple" />
+                @change="handleItemChange(item)" v-if="isCheck" />
             <span v-else>{{ item[props.labelKey] }}</span>
         </el-option>
 
-        <el-option class="el-select-loading" value="">
+        <el-option class="el-select-loading" value="" v-if="isLoadmore">
             <template v-if="hasMore">
                 <el-icon class="el-select-loading__icon">
                     <el-icon-loading />
@@ -33,13 +33,12 @@ import cloneDeep from 'lodash/cloneDeep'
 import vLoadmore from './v-loadmore.ts';
 const checkAll = ref<boolean>(false)
 const isIndeterminate = ref(false)
-const page = ref<number>(0)
 const props = defineProps({
     modelValue: {
         type: [String, Number, Array]
     },
     // 是否多选
-    isMuliple: {
+    isCheck: {
         type: Boolean,
         default: false
     },
@@ -80,7 +79,7 @@ const props = defineProps({
     },
 })
 
-const emits = defineEmits(['update:modelValue', 'loadmore'])
+const emits = defineEmits(['update:modelValue', 'loadmore', 'change'])
 const loading = ref<boolean>(false);
 const selectVal = computed({
     get() {
@@ -88,31 +87,40 @@ const selectVal = computed({
     },
     set(val) {
         emits('update:modelValue', val)
+        emits('change', val)
     }
 })
 
 const selectData = ref<any[]>(cloneDeep(props.data))
 
-const handleItemChange = function (item) {
+const handleItemChange = function (item: any) {
     if (item.checked) {
-        emits('update:modelValue', [...selectVal.value, item[props.valueKey]])
+        const updateSelect = [...(selectVal.value as any[]), item[props.valueKey]]
+        emits('update:modelValue', updateSelect)
+        emits('change', updateSelect)
+
     } else {
-        emits('update:modelValue', selectVal.value.filter(_ => _ !== item[props.valueKey]))
+        const updateSelect = (selectVal.value as any[]).filter(_ => _ !== item[props.valueKey])
+        emits('update:modelValue', updateSelect)
+        emits('change', updateSelect)
     }
 }
 
 const handleCheckAllChange = function () {
     if (checkAll.value) {
+        const updateSelect = selectData.value.map(_ => _[props.valueKey])
         selectData.value.forEach(_ => _.checked = true)
-        emits('update:modelValue', selectData.value.map(_ => _[props.valueKey]))
+        emits('update:modelValue', updateSelect)
+        emits('change', updateSelect)
 
     } else {
         selectData.value.forEach(_ => _.checked = false)
         emits('update:modelValue', [])
+        emits('change', [])
     }
 }
 
-watch(selectVal, (nowSelectVal) => {
+watch(selectVal, (nowSelectVal: any) => {
     checkAll.value = nowSelectVal.length === selectData.value.length ? true : false
     isIndeterminate.value = nowSelectVal.length !== selectData.value.length && nowSelectVal.length ? true : false
 }, {
@@ -128,15 +136,9 @@ watch(() => props.data, d => {
 const loadmoreFn = function () {
     if (!loading.value) {
         loading.value = true
-        emits('loadmore', {
-            page: page.value++
-        })
+        emits('loadmore')
     }
 }
-
-onMounted(() => {
-    loadmoreFn()
-})
 </script>
 
 <style scoped lang="scss">
