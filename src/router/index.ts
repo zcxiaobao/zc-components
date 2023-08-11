@@ -37,6 +37,10 @@ const routes: RouteRecordRaw[] = [
             path: "loadmore",
             component: import("../views/select/loadmoreSelect/index.vue"),
           },
+          {
+            path: "virtual",
+            component: import("../views/select/virtualSelect/index.vue"),
+          },
         ],
       },
       {
@@ -62,7 +66,7 @@ const routes: RouteRecordRaw[] = [
           },
           {
             path: "longpress",
-            component: () => import("../views/directive/vLongPress/index.vue"),
+            component: () => import("../views/directive/vLongpress/index.vue"),
           },
         ],
       },

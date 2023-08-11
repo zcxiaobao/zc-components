@@ -55,6 +55,11 @@ const data = [
                 index: "/select/loadmore",
                 icon: "Mouse",
             },
+            {
+                name: "虚拟滚动下拉框",
+                index: "/select/virtual",
+                icon: "Mouse",
+            },
         ],
     },
     {
