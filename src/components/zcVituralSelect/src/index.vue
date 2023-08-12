@@ -2,7 +2,9 @@
     <el-select ref="elSelectRef" v-model="selectVal" size="large" :teleported="false" @visible-change="handleVisible">
         <li class="start"></li>
         <template v-for="(item, i) in selectData" :key="item.value">
-            <el-option :label="item.label" :value="item.value" v-if="isRender(i)" ref="elOptionItem" />
+            <el-option :label="item.label" :value="item.value" v-if="isRender(i)" ref="elOptionItem">
+                <slot v-bind="item"></slot>
+            </el-option>
         </template>
         <li class="end"></li>
     </el-select>
@@ -21,9 +23,17 @@ const props = defineProps({
     data: {
         type: Array as PropType<selectItem[]>
     },
-    maxRender: {
+    itemRender: {
         type: Number,
         default: 20
+    },
+    itemHeight: {
+        type: Number,
+        default: 34
+    },
+    isRandomHei: {
+        type: Boolean,
+        default: false
     }
 })
 const selectData = ref<selectItem[]>(cloneDeep(props.data) as selectItem[])
@@ -45,10 +55,12 @@ const {
     startObserver,
     stopObserver,
     isRender,
+    alterOptions
 } = useVirtual({
-    maxRender: props.maxRender,
-    listItemHeight: 34,
-    listNumber: selectData.value.length
+    itemRender: props.itemRender,
+    minItemHeight: props.itemHeight,
+    itemTotal: selectData.value.length,
+    isRandomHei: props.isRandomHei
 })
 
 
@@ -69,7 +81,17 @@ const handleVisible = (isVisible: boolean) => {
 
 watch(() => props.data, d => {
     selectData.value = cloneDeep(d) as selectItem[]
-})
+    alterOptions({
+        itemRender: props.itemRender,
+        minItemHeight: 34,
+        isRandomHei: props.isRandomHei,
+        itemTotal: selectData.value.length
+    })
+}, { deep: true })
 </script>
 
-<style scoped></style>
+<style scoped>
+.el-select-dropdown__item {
+    height: 100%;
+}
+</style>

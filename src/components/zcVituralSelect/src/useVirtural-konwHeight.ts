@@ -1,10 +1,8 @@
-import { sumArray } from "@/utils";
 import { computed, ref } from "vue";
 interface virtualOption {
-  itemRender: number;
-  minItemHeight: number;
-  isRandomHei: boolean;
-  itemTotal: number;
+  maxRender: number;
+  listItemHeight: number;
+  listNumber: number;
 }
 interface ObserverDom {
   container: HTMLElement;
@@ -13,83 +11,57 @@ interface ObserverDom {
 }
 
 export default function useVirtual(options: virtualOption) {
-  const nextRenderNum = options.itemRender >> 1;
-  const maxFirstIndex = options.itemTotal - options.itemRender;
+  const firstIndex = ref<number>(0);
+  const currentIndex = ref<number>(0);
+  const lastIndex = computed(() => firstIndex.value + options.maxRender);
+  const increseNum = computed(() => options.maxRender >> 1);
+  const isRender = computed(() => (index: number) => {
+    return index >= firstIndex.value && index < lastIndex.value;
+  });
+  let observerDom: ObserverDom = {} as ObserverDom;
+  let observer: IntersectionObserver;
   const domDataCache = {
     currentPaddingTop: 6,
     currentPaddingBottom: 6,
   };
-  let observerDom: ObserverDom = {} as ObserverDom;
-  let observer: IntersectionObserver;
-
-  const firstIndex = ref<number>(0);
-  const currentIndex = ref<number>(0);
-  let allminItemHeight = ref<number[]>(
-    new Array(options.itemTotal).fill(options.minItemHeight)
-  );
-  const lastIndex = computed(() => firstIndex.value + options.itemRender);
-  const isRender = computed(() => (index: number) => {
-    return index >= firstIndex.value && index < lastIndex.value;
-  });
-
-  const calcAlterPadding = function (isScrolldown: boolean) {
-    return isScrolldown
-      ? sumArray(
-          allminItemHeight.value.slice(
-            lastIndex.value - nextRenderNum,
-            lastIndex.value
-          )
-        )
-      : sumArray(
-          allminItemHeight.value.slice(
-            firstIndex.value,
-            firstIndex.value + nextRenderNum
-          )
-        );
-  };
-  const updateAllminItemHeight = function () {
-    const liDom = observerDom.container.getElementsByTagName("li");
-    for (let i = firstIndex.value; i < lastIndex.value; i++) {
-      const newHeight = liDom[i - firstIndex.value + 1].clientHeight;
-      allminItemHeight.value[i] = newHeight;
-    }
-  };
-  const calcFirstIndex = function (isScrolldown: boolean) {
+  const getFirstIndex = function (isScrolldown: boolean) {
     if (isScrolldown) {
-      firstIndex.value = currentIndex.value + nextRenderNum;
+      firstIndex.value = currentIndex.value + increseNum.value;
     } else {
-      firstIndex.value = currentIndex.value - nextRenderNum;
+      firstIndex.value = currentIndex.value - increseNum.value;
     }
     if (firstIndex.value < 0) {
       firstIndex.value = 0;
-    } else if (firstIndex.value > maxFirstIndex) {
-      firstIndex.value = maxFirstIndex;
+    } else if (firstIndex.value > options.listNumber - increseNum.value) {
+      firstIndex.value = options.listNumber - increseNum.value;
     }
   };
   const adjustPadding = (isScrolldown: boolean) => {
-    options.isRandomHei && updateAllminItemHeight();
-    const alterPadding = options.isRandomHei
-      ? calcAlterPadding(isScrolldown)
-      : options.minItemHeight * nextRenderNum;
-    let { currentPaddingTop } = domDataCache;
-    let newPaddingTop = 0;
+    const alterPadding = options.listItemHeight * increseNum.value;
+    let { currentPaddingTop, currentPaddingBottom } = domDataCache;
+    let newPaddingTop = 0,
+      newPaddingBottom = 0;
     if (isScrolldown) {
       newPaddingTop = currentPaddingTop + alterPadding;
+      //   if (currentPaddingBottom !== 0) {
+      //     newPaddingBottom = currentPaddingBottom - alterPadding;
+      //   }
     } else {
+      //   newPaddingBottom = currentPaddingBottom + alterPadding;
       if (currentPaddingTop !== 0) {
         newPaddingTop = currentPaddingTop - alterPadding;
       }
     }
     observerDom.container.style.paddingTop = `${newPaddingTop}px`;
+    // observerDom.container.style.paddingBottom = `${newPaddingBottom}px`;
     updateDomDataCache({
       currentPaddingTop: newPaddingTop,
+      currentPaddingBottom: newPaddingBottom,
     });
   };
-
   const updateDomDataCache = function (params: any) {
     Object.assign(domDataCache, params);
   };
-
   const initIntersectionObserver = function () {
     const callback = (entries: IntersectionObserverEntry[]) => {
       if (entries.length >= 2) return;
@@ -97,10 +69,10 @@ export default function useVirtual(options: virtualOption) {
       if (entry.intersectionRatio <= 0) return;
       if (!entry.isIntersecting) return;
       if (entry.target === observerDom.firstDom) {
-        calcFirstIndex(false);
+        getFirstIndex(false);
         adjustPadding(false);
       } else if (entry.target === observerDom.endDom) {
-        calcFirstIndex(true);
+        getFirstIndex(true);
         adjustPadding(true);
       }
       currentIndex.value = firstIndex.value;
@@ -118,7 +90,6 @@ export default function useVirtual(options: virtualOption) {
     observerDom.firstDom = observerDom.container.querySelector(".start")!;
     observerDom.endDom = observerDom.container.querySelector(".end")!;
   };
-
   const startObserver = (selectDom: HTMLElement) => {
     getIntersectionObserverDom(selectDom);
     initIntersectionObserver();
@@ -128,17 +99,9 @@ export default function useVirtual(options: virtualOption) {
     observer.disconnect && observer.disconnect();
     observerDom = {} as ObserverDom;
   };
-
-  const alterOptions = function (newOptions: virtualOption) {
-    options = newOptions;
-    allminItemHeight.value = new Array(options.itemTotal).fill(
-      options.minItemHeight
-    );
-  };
   return {
     startObserver,
     stopObserver,
     isRender,
-    alterOptions,
   };
 }
