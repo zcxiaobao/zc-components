@@ -63,6 +63,11 @@ const data = [
         ],
     },
     {
+        name: "详情列表",
+        index: "/detail",
+        icon: "Mouse",
+    },
+    {
         name: "自定义指令",
         index: "/directive",
         icon: "Tools",

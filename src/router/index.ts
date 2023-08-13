@@ -44,6 +44,10 @@ const routes: RouteRecordRaw[] = [
         ],
       },
       {
+        path: "detail",
+        component: () => import("../views/detail/index.vue"),
+      },
+      {
         path: "/directive",
         component: () => import("../views/directive/index.vue"),
         redirect: "/directive/drag",
