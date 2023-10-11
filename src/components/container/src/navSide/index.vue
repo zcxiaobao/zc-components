@@ -63,6 +63,18 @@ const data = [
         ],
     },
     {
+        name: "表格",
+        index: "/table",
+        icon: "ChatLineRound",
+        children: [
+            {
+                name: "基本表格",
+                index: "/table/basetable",
+                icon: "Mouse",
+            },
+        ],
+    },
+    {
         name: "详情列表",
         index: "/detail",
         icon: "Mouse",

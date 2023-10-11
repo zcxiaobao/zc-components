@@ -44,6 +44,16 @@ const routes: RouteRecordRaw[] = [
         ],
       },
       {
+        path: "table",
+        component: () => import("../views/table/index.vue"),
+        children: [
+          {
+            path: "basetable",
+            component: import("../views/table/baseTable/index.vue"),
+          },
+        ],
+      },
+      {
         path: "detail",
         component: () => import("../views/detail/index.vue"),
       },
