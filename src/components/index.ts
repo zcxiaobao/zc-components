@@ -6,6 +6,7 @@ import select from "./zcSelect";
 import virualSelect from "./zcVituralSelect";
 import detail from "./detail";
 import table from "./zcTable";
+import form from "./zcForm";
 
 const components = [
   menu,
@@ -15,6 +16,7 @@ const components = [
   virualSelect,
   detail,
   table,
+  form,
 ];
 
 export default {

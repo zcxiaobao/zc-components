@@ -13,7 +13,9 @@
     "element-plus": "^2.3.8",
     "lodash": "^4.17.21",
     "vue": "^3.3.4",
-    "vue-router": "^4.0.13"
+    "vue-router": "^4.0.13",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",

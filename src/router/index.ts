@@ -54,6 +54,16 @@ const routes: RouteRecordRaw[] = [
         ],
       },
       {
+        path: "form",
+        component: () => import("../views/form/index.vue"),
+        children: [
+          {
+            path: "baseform",
+            component: import("../views/form/baseForm/index.vue"),
+          },
+        ],
+      },
+      {
         path: "detail",
         component: () => import("../views/detail/index.vue"),
       },
