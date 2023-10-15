@@ -1,0 +1,1 @@
+import{d as n,r as a,l as r,m as c,o as i,e as l,w as _,f as p,k as u}from"./index-9941a9e9.js";const b=n({__name:"index",setup(m){const s=function(e){u.success("事件触发，内容为: "+JSON.stringify(e))};return(e,f)=>{const t=a("el-button"),o=r("longpress");return c((i(),l(t,null,{default:_(()=>[p("长按2s后触发")]),_:1})),[[o,{cb:s,params:{a:1,b:2}}]])}}});export{b as default};

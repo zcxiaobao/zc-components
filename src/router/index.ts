@@ -4,6 +4,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/",
     component: Container,
+    redirect: "/menu",
     children: [
       { path: "menu", component: () => import("../views/menu/index.vue") },
       {
@@ -31,15 +32,15 @@ const routes: RouteRecordRaw[] = [
         children: [
           {
             path: "multiple",
-            component: import("../views/select/multipleSelect/index.vue"),
+            component: () => import("../views/select/multipleSelect/index.vue"),
           },
           {
             path: "loadmore",
-            component: import("../views/select/loadmoreSelect/index.vue"),
+            component: () => import("../views/select/loadmoreSelect/index.vue"),
           },
           {
             path: "virtual",
-            component: import("../views/select/virtualSelect/index.vue"),
+            component: () => import("../views/select/virtualSelect/index.vue"),
           },
         ],
       },
@@ -49,7 +50,7 @@ const routes: RouteRecordRaw[] = [
         children: [
           {
             path: "basetable",
-            component: import("../views/table/baseTable/index.vue"),
+            component: () => import("../views/table/baseTable/index.vue"),
           },
         ],
       },
@@ -59,7 +60,7 @@ const routes: RouteRecordRaw[] = [
         children: [
           {
             path: "baseform",
-            component: import("../views/form/baseForm/index.vue"),
+            component: () => import("../views/form/baseForm/index.vue"),
           },
         ],
       },

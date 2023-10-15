@@ -5,6 +5,10 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/zc-components/",
+  build: {
+    outDir: "docs",
+  },
   plugins: [vue(), vueJsx()],
   server: {
     port: 8080,

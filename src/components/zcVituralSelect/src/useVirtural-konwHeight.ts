@@ -38,7 +38,7 @@ export default function useVirtual(options: virtualOption) {
   };
   const adjustPadding = (isScrolldown: boolean) => {
     const alterPadding = options.listItemHeight * increseNum.value;
-    let { currentPaddingTop, currentPaddingBottom } = domDataCache;
+    let { currentPaddingTop } = domDataCache;
     let newPaddingTop = 0,
       newPaddingBottom = 0;
     if (isScrolldown) {

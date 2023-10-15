@@ -96,7 +96,7 @@ const tableData = ref<any[]>([
   },
 ]);
 const table = ref();
-function edit(scope) {
+function edit(scope: any) {
   table.value.whichRowEdit(scope);
 }
 
@@ -121,7 +121,7 @@ const confirmEdit = async (scope: any) => {
   }
 };
 
-const cancel = (scope) => {
+const cancel = (scope: any) => {
   table.value.cancelEdit(scope);
 };
 </script>

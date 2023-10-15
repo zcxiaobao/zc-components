@@ -1,0 +1,1 @@
+import{_ as s,l as _,o as e,c as t,m as o,f as a}from"./index-9941a9e9.js";const n={},r={class:"content-box"},d={class:"drag-container flex-center"};function i(l,f){const c=_("draggable");return e(),t("div",r,[o((e(),t("div",d,[a(" 我是可拖拽的元素 ")])),[[c]])])}const x=s(n,[["render",i],["__scopeId","data-v-10f4f776"]]);export{x as default};

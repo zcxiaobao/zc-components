@@ -18,10 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import { FormOptionItem } from "../../../components/zcForm/src/types";
 import { ElMessage } from "element-plus";
 import { ref } from "vue";
-let options: FormOptionItem[] = [
+let options = [
   {
     type: "input",
     value: "",
@@ -207,8 +206,8 @@ let options: FormOptionItem[] = [
   },
 ];
 let form = ref();
-const submitForm = (scope) => {
-  scope.form.validate((valid) => {
+const submitForm = (scope: any) => {
+  scope.form.validate((valid: any) => {
     if (valid) {
       console.log(scope.model);
       ElMessage.success("提交成功");

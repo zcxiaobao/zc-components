@@ -19,10 +19,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["element-plus/global"],
+    "types": [],
     "paths": {
       "@/*": [
-        "src/*"
+        "./src/*"
       ]
     },
   },
